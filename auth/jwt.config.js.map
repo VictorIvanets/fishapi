@@ -1,0 +1,1 @@
+{"version":3,"file":"jwt.config.js","sourceRoot":"","sources":["../../src/auth/jwt.config.ts"],"names":[],"mappings":";;;AAGO,MAAM,YAAY,GAAG,KAAK,EAChC,aAA4B,EACA,EAAE;IAC9B,OAAO;QACN,MAAM,EAAE,aAAa,CAAC,GAAG,CAAC,YAAY,CAAC;KACvC,CAAA;AACF,CAAC,CAAA;AANY,QAAA,YAAY,gBAMxB"}
