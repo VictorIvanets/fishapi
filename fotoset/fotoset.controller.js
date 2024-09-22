@@ -22,16 +22,18 @@ let FotosetController = class FotosetController {
         this.fotosetService = fotosetService;
     }
     async uploadFoto(file, folder) {
-        console.log('upload', file);
-        const saveArr = [];
-        if (file.mimetype.includes('image')) {
-            const buffer = await this.fotosetService.convertToWebp(file.buffer);
-            saveArr.push(new mfile_class_1.MFile({
-                originalname: `${file.originalname.split('.')[0]}.webp`,
-                buffer,
-            }));
+        if (file) {
+            console.log('upload', file);
+            const saveArr = [];
+            if (file.mimetype.includes('image')) {
+                const buffer = await this.fotosetService.convertToWebp(file.buffer);
+                saveArr.push(new mfile_class_1.MFile({
+                    originalname: `${file.originalname.split('.')[0]}.webp`,
+                    buffer,
+                }));
+            }
+            return this.fotosetService.saveFoto(saveArr, folder);
         }
-        return this.fotosetService.saveFoto(saveArr, folder);
     }
 };
 exports.FotosetController = FotosetController;
