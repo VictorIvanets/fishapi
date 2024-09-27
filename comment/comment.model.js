@@ -9,33 +9,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthDto = void 0;
-const class_validator_1 = require("class-validator");
-class AuthDto {
+exports.CommentModel = void 0;
+const typegoose_1 = require("@typegoose/typegoose");
+const defaultClasses_1 = require("@typegoose/typegoose/lib/defaultClasses");
+class CommentModel extends defaultClasses_1.TimeStamps {
 }
-exports.AuthDto = AuthDto;
+exports.CommentModel = CommentModel;
 __decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], AuthDto.prototype, "login", void 0);
+    (0, typegoose_1.prop)({ unique: true }),
+    __metadata("design:type", Number)
+], CommentModel.prototype, "commId", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
+    (0, typegoose_1.prop)(),
     __metadata("design:type", String)
-], AuthDto.prototype, "password", void 0);
+], CommentModel.prototype, "login", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
+    (0, typegoose_1.prop)(),
     __metadata("design:type", String)
-], AuthDto.prototype, "name", void 0);
+], CommentModel.prototype, "setId", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
+    (0, typegoose_1.prop)(),
     __metadata("design:type", String)
-], AuthDto.prototype, "subname", void 0);
+], CommentModel.prototype, "comment", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
+    (0, typegoose_1.prop)(),
     __metadata("design:type", String)
-], AuthDto.prototype, "country", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], AuthDto.prototype, "city", void 0);
-//# sourceMappingURL=auth.dto.js.map
+], CommentModel.prototype, "db", void 0);
+//# sourceMappingURL=comment.model.js.map

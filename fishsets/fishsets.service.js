@@ -31,6 +31,7 @@ let FishsetsService = class FishsetsService {
             setID: dto.setID,
             db: 'database',
             img: [],
+            weather: dto.weather,
         });
         console.log(newSets);
         return newSets.save();
@@ -41,7 +42,7 @@ let FishsetsService = class FishsetsService {
     async findAllSets(db) {
         return this.fishModel.find({ db }).exec();
     }
-    async delById(setID = `0`) {
+    async delById(setID) {
         const res = this.fishModel.find({ setID }).exec();
         if (res) {
             this.fishModel.findOneAndDelete({ setID }).exec();

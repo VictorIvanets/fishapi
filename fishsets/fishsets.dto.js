@@ -52,4 +52,9 @@ __decorate([
     (0, class_validator_1.IsArray)(),
     __metadata("design:type", Array)
 ], FishDto.prototype, "img", void 0);
+__decorate([
+    (0, class_validator_1.IsObject)(),
+    (0, class_validator_1.IsArray)(),
+    __metadata("design:type", Array)
+], FishDto.prototype, "weather", void 0);
 //# sourceMappingURL=fishsets.dto.js.map

@@ -32,11 +32,8 @@ let AuthService = class AuthService {
             passwordHash: (0, bcryptjs_1.hashSync)(dto.password, salt),
             name: dto.name,
             subname: dto.subname,
-            age: dto.age,
-            sex: dto.sex,
             country: dto.country,
             city: dto.city,
-            img: dto.img,
         });
         console.log(newUser);
         return newUser.save();

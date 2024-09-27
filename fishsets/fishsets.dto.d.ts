@@ -8,4 +8,5 @@ export declare class FishDto {
     coords: number[];
     db: string;
     img: string[];
+    weather: object[];
 }

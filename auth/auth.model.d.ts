@@ -10,9 +10,6 @@ export declare class AuthModel extends TimeStamps {
     passwordHash: string;
     name: string;
     subname: string;
-    age: number;
-    sex: Sex;
     country: string;
     city: string;
-    img?: string;
 }

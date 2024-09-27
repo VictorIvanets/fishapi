@@ -38,22 +38,10 @@ __decorate([
 ], AuthModel.prototype, "subname", void 0);
 __decorate([
     (0, typegoose_1.prop)(),
-    __metadata("design:type", Number)
-], AuthModel.prototype, "age", void 0);
-__decorate([
-    (0, typegoose_1.prop)(),
-    __metadata("design:type", String)
-], AuthModel.prototype, "sex", void 0);
-__decorate([
-    (0, typegoose_1.prop)(),
     __metadata("design:type", String)
 ], AuthModel.prototype, "country", void 0);
 __decorate([
     (0, typegoose_1.prop)(),
     __metadata("design:type", String)
 ], AuthModel.prototype, "city", void 0);
-__decorate([
-    (0, typegoose_1.prop)(),
-    __metadata("design:type", String)
-], AuthModel.prototype, "img", void 0);
 //# sourceMappingURL=auth.model.js.map

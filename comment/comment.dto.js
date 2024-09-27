@@ -9,33 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthDto = void 0;
+exports.CommentDto = void 0;
 const class_validator_1 = require("class-validator");
-class AuthDto {
+class CommentDto {
 }
-exports.AuthDto = AuthDto;
+exports.CommentDto = CommentDto;
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", String)
+], CommentDto.prototype, "setId", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], AuthDto.prototype, "login", void 0);
+], CommentDto.prototype, "login", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], AuthDto.prototype, "password", void 0);
+], CommentDto.prototype, "comment", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CommentDto.prototype, "commId", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], AuthDto.prototype, "name", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], AuthDto.prototype, "subname", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], AuthDto.prototype, "country", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], AuthDto.prototype, "city", void 0);
-//# sourceMappingURL=auth.dto.js.map
+], CommentDto.prototype, "db", void 0);
+//# sourceMappingURL=comment.dto.js.map

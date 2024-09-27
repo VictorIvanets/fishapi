@@ -16,10 +16,11 @@ exports.FishsetsController = void 0;
 const common_1 = require("@nestjs/common");
 const fishsets_service_1 = require("./fishsets.service");
 const fishsets_dto_1 = require("./fishsets.dto");
-const REGISTER_ERROR = 'такий user зараєстрован';
+const comment_service_1 = require("../comment/comment.service");
 let FishsetsController = class FishsetsController {
-    constructor(fishService) {
+    constructor(fishService, commentService) {
         this.fishService = fishService;
+        this.commentService = commentService;
     }
     async sets(dto) {
         return await this.fishService.createSets(dto);
@@ -38,17 +39,20 @@ let FishsetsController = class FishsetsController {
                 date: i.date,
                 setID: i.setID,
                 img: i.img,
+                weather: i.weather,
             };
             return news;
         });
         return output;
     }
     async delSet(id) {
+        await this.commentService.delCommBySetId(id);
         return await this.fishService.delById(id);
     }
     async getSetsById(id) {
-        const { title, description, score, coords, date, setID, img } = await this.fishService.getSetsById(id);
+        const { title, description, score, coords, date, setID, img, login, weather, } = await this.fishService.getSetsById(id);
         const output = {
+            login: login,
             title: title,
             description: description,
             score: score,
@@ -56,6 +60,7 @@ let FishsetsController = class FishsetsController {
             date: date,
             setID: setID,
             img: img,
+            weather: weather,
         };
         return output;
     }
@@ -103,6 +108,7 @@ __decorate([
 ], FishsetsController.prototype, "getSetsById", null);
 exports.FishsetsController = FishsetsController = __decorate([
     (0, common_1.Controller)('fishsets'),
-    __metadata("design:paramtypes", [fishsets_service_1.FishsetsService])
+    __metadata("design:paramtypes", [fishsets_service_1.FishsetsService,
+        comment_service_1.CommentService])
 ], FishsetsController);
 //# sourceMappingURL=fishsets.controller.js.map

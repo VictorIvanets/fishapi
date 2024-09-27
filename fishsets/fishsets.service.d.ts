@@ -7,6 +7,6 @@ export declare class FishsetsService {
     createSets(dto: FishDto): Promise<FishModel>;
     findUserSets(login: string): Promise<FishModel[]>;
     findAllSets(db: string): Promise<Omit<FishModel[], 'login'>>;
-    delById(setID?: string): Promise<string>;
+    delById(setID: string): Promise<string>;
     getSetsById(setID: string): Promise<FishModel>;
 }

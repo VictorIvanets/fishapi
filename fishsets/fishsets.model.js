@@ -51,4 +51,8 @@ __decorate([
     (0, typegoose_1.prop)({ type: () => [String] }),
     __metadata("design:type", Array)
 ], FishModel.prototype, "img", void 0);
+__decorate([
+    (0, typegoose_1.prop)({ type: () => [Object] }),
+    __metadata("design:type", Array)
+], FishModel.prototype, "weather", void 0);
 //# sourceMappingURL=fishsets.model.js.map

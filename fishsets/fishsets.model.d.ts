@@ -11,4 +11,5 @@ export declare class FishModel extends TimeStamps {
     coords: number[];
     db: string;
     img: string[];
+    weather: object[];
 }
