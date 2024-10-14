@@ -17,6 +17,7 @@ const mongo_config_1 = require("./config/mongo-config");
 const fishsets_module_1 = require("./fishsets/fishsets.module");
 const fotoset_module_1 = require("./fotoset/fotoset.module");
 const comment_module_1 = require("./comment/comment.module");
+const getfoto_module_1 = require("./getfoto/getfoto.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -33,6 +34,7 @@ exports.AppModule = AppModule = __decorate([
             fishsets_module_1.FishsetsModule,
             fotoset_module_1.FotosetModule,
             comment_module_1.CommentModule,
+            getfoto_module_1.GetfotoModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

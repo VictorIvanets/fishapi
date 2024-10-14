@@ -6,21 +6,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FotosetModule = void 0;
+exports.GetfotoModule = void 0;
 const common_1 = require("@nestjs/common");
-const fotoset_service_1 = require("./fotoset.service");
-const fotoset_controller_1 = require("./fotoset.controller");
+const getfoto_service_1 = require("./getfoto.service");
+const getfoto_controller_1 = require("./getfoto.controller");
+const nestjs_typegoose_1 = require("nestjs-typegoose");
+const config_1 = require("@nestjs/config");
+const getfoto_model_1 = require("./getfoto.model");
 const serve_static_1 = require("@nestjs/serve-static");
 const app_root_path_1 = require("app-root-path");
-const nestjs_typegoose_1 = require("nestjs-typegoose");
-const fishsets_model_1 = require("../fishsets/fishsets.model");
-const config_1 = require("@nestjs/config");
-let FotosetModule = class FotosetModule {
+let GetfotoModule = class GetfotoModule {
 };
-exports.FotosetModule = FotosetModule;
-exports.FotosetModule = FotosetModule = __decorate([
+exports.GetfotoModule = GetfotoModule;
+exports.GetfotoModule = GetfotoModule = __decorate([
     (0, common_1.Global)(),
     (0, common_1.Module)({
+        controllers: [getfoto_controller_1.GetfotoController],
         imports: [
             serve_static_1.ServeStaticModule.forRoot({
                 rootPath: `${app_root_path_1.path}/upload`,
@@ -28,16 +29,16 @@ exports.FotosetModule = FotosetModule = __decorate([
             }),
             nestjs_typegoose_1.TypegooseModule.forFeature([
                 {
-                    typegooseClass: fishsets_model_1.FishModel,
+                    typegooseClass: getfoto_model_1.GetFotoModel,
                     schemaOptions: {
-                        collection: 'fishsets',
+                        collection: 'getfoto',
                     },
                 },
             ]),
             config_1.ConfigModule,
         ],
-        providers: [fotoset_service_1.FotosetService],
-        controllers: [fotoset_controller_1.FotosetController],
+        providers: [getfoto_service_1.GetfotoService],
+        exports: [getfoto_service_1.GetfotoService],
     })
-], FotosetModule);
-//# sourceMappingURL=fotoset.module.js.map
+], GetfotoModule);
+//# sourceMappingURL=getfoto.module.js.map

@@ -1,1 +1,1 @@
-{"version":3,"file":"fotoset.dto.js","sourceRoot":"","sources":["../../src/fotoset/fotoset.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AACA,qDAA6D;AAE7D,MAAa,OAAO;CAKnB;AALD,0BAKC;AAHA;IADC,IAAA,0BAAQ,GAAE;;sCACE;AAEb;IADC,IAAA,0BAAQ,GAAE;;qCACG;AAGf,MAAa,gBAAgB;CAG5B;AAHD,4CAGC"}
+{"version":3,"file":"fotoset.dto.js","sourceRoot":"","sources":["../../src/fotoset/fotoset.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,qDAA0C;AAE1C,MAAa,OAAO;CAKnB;AALD,0BAKC;AAHA;IADC,IAAA,0BAAQ,GAAE;;sCACE;AAEb;IADC,IAAA,0BAAQ,GAAE;;qCACG;AAGf,MAAa,gBAAgB;CAG5B;AAHD,4CAGC"}

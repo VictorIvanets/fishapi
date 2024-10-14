@@ -17,10 +17,12 @@ const common_1 = require("@nestjs/common");
 const fishsets_service_1 = require("./fishsets.service");
 const fishsets_dto_1 = require("./fishsets.dto");
 const comment_service_1 = require("../comment/comment.service");
+const getfoto_service_1 = require("../getfoto/getfoto.service");
 let FishsetsController = class FishsetsController {
-    constructor(fishService, commentService) {
+    constructor(fishService, commentService, getfotoService) {
         this.fishService = fishService;
         this.commentService = commentService;
+        this.getfotoService = getfotoService;
     }
     async sets(dto) {
         return await this.fishService.createSets(dto);
@@ -46,6 +48,7 @@ let FishsetsController = class FishsetsController {
         return output;
     }
     async delSet(id) {
+        await this.getfotoService.delBySetId(id);
         await this.commentService.delCommBySetId(id);
         return await this.fishService.delById(id);
     }
@@ -109,6 +112,7 @@ __decorate([
 exports.FishsetsController = FishsetsController = __decorate([
     (0, common_1.Controller)('fishsets'),
     __metadata("design:paramtypes", [fishsets_service_1.FishsetsService,
-        comment_service_1.CommentService])
+        comment_service_1.CommentService,
+        getfoto_service_1.GetfotoService])
 ], FishsetsController);
 //# sourceMappingURL=fishsets.controller.js.map

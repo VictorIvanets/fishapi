@@ -15,8 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FotosetService = void 0;
 const common_1 = require("@nestjs/common");
 const nestjs_typegoose_1 = require("nestjs-typegoose");
-const app_root_path_1 = require("app-root-path");
-const fs_extra_1 = require("fs-extra");
 const sharp = require("sharp");
 const fishsets_model_1 = require("../fishsets/fishsets.model");
 let FotosetService = class FotosetService {
@@ -24,11 +22,8 @@ let FotosetService = class FotosetService {
         this.fishModel = fishModel;
     }
     async saveFoto(files, folder) {
-        const uploadFolder = `${app_root_path_1.path}/upload/${folder}`;
-        await (0, fs_extra_1.ensureDir)(uploadFolder);
         const res = [];
         for (const file of files) {
-            await (0, fs_extra_1.writeFile)(`${uploadFolder}/${file.originalname}`, file.buffer);
             res.push({
                 url: `${folder}/${file.originalname}`,
                 name: file.originalname,

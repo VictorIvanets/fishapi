@@ -17,21 +17,16 @@ const platform_express_1 = require("@nestjs/platform-express");
 const fotoset_service_1 = require("./fotoset.service");
 const common_1 = require("@nestjs/common");
 const mfile_class_1 = require("./mfile.class");
+const getfoto_service_1 = require("../getfoto/getfoto.service");
 let FotosetController = class FotosetController {
-    constructor(fotosetService) {
+    constructor(fotosetService, getfotoService) {
         this.fotosetService = fotosetService;
+        this.getfotoService = getfotoService;
     }
     async uploadFoto(file, folder) {
         if (file) {
-            console.log('upload', file);
-            const saveArr = [];
-            if (file.mimetype.includes('image')) {
-                const buffer = await this.fotosetService.convertToWebp(file.buffer);
-                saveArr.push(new mfile_class_1.MFile({
-                    originalname: `${file.originalname.split('.')[0]}.webp`,
-                    buffer,
-                }));
-            }
+            const saveArr = [new mfile_class_1.MFile(file)];
+            this.getfotoService.saveFotoBd(saveArr, folder);
             return this.fotosetService.saveFoto(saveArr, folder);
         }
     }
@@ -49,6 +44,7 @@ __decorate([
 ], FotosetController.prototype, "uploadFoto", null);
 exports.FotosetController = FotosetController = __decorate([
     (0, common_1.Controller)('fotoset'),
-    __metadata("design:paramtypes", [fotoset_service_1.FotosetService])
+    __metadata("design:paramtypes", [fotoset_service_1.FotosetService,
+        getfoto_service_1.GetfotoService])
 ], FotosetController);
 //# sourceMappingURL=fotoset.controller.js.map

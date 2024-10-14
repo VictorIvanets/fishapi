@@ -17,6 +17,7 @@ let FishsetsModule = class FishsetsModule {
 };
 exports.FishsetsModule = FishsetsModule;
 exports.FishsetsModule = FishsetsModule = __decorate([
+    (0, common_1.Global)(),
     (0, common_1.Module)({
         controllers: [fishsets_controller_1.FishsetsController],
         imports: [
