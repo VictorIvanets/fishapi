@@ -18,6 +18,7 @@ const fs_extra_1 = require("fs-extra");
 const app_root_path_1 = require("app-root-path");
 const nestjs_typegoose_1 = require("nestjs-typegoose");
 const getfoto_model_1 = require("./getfoto.model");
+const sharp = require("sharp");
 let GetfotoService = class GetfotoService {
     constructor(getFotoModel) {
         this.getFotoModel = getFotoModel;
@@ -40,8 +41,24 @@ let GetfotoService = class GetfotoService {
         else
             return res;
     }
+    convertToJpegMin(file) {
+        const size = file.byteLength;
+        if (size <= 200000) {
+            return sharp(file).jpeg().toBuffer();
+        }
+        if (size > 200000 && size <= 500000) {
+            return sharp(file).jpeg({ quality: 75 }).toBuffer();
+        }
+        if (size > 500000 && size <= 2000000) {
+            return sharp(file).resize(1000).jpeg({ quality: 75 }).toBuffer();
+        }
+        if (size > 2000000) {
+            return sharp(file).resize(1500).jpeg({ quality: 75 }).toBuffer();
+        }
+    }
     async saveFotoBd(files, folder) {
         for (const file of files) {
+            const minbuffer = await this.convertToJpegMin(file.buffer);
             const filename = file.originalname;
             const fotoset = await this.getFotoModel.findOne({ filename }).exec();
             const check = fotoset?.setid === folder ? true : false;
@@ -50,7 +67,7 @@ let GetfotoService = class GetfotoService {
                 const res = new this.getFotoModel({
                     setid: folder,
                     filename: file.originalname,
-                    imgBuffer: file.buffer,
+                    imgBuffer: minbuffer,
                 });
                 res.save();
             }

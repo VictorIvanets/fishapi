@@ -5,6 +5,7 @@ export declare class GetfotoService {
     private readonly getFotoModel;
     constructor(getFotoModel: ModelType<GetFotoModel>);
     getFoto(folder: string): Promise<string[]>;
+    convertToJpegMin(file: Buffer): Promise<Buffer>;
     saveFotoBd(files: MFile[], folder: string): Promise<string>;
     getAllFotoBySetId(setid: string): Promise<GetFotoModel[]>;
     delBySetId(setid: string): Promise<string>;
