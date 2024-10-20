@@ -34,10 +34,7 @@ let GetfotoService = class GetfotoService {
                 const originalname = fotoitem.filename;
                 const buffer = fotoitem.imgBuffer;
                 res.push(originalname);
-                const check = await (0, fs_extra_1.readFile)(`${uploadFolder}/${originalname}`);
-                if (!check) {
-                    await (0, fs_extra_1.writeFile)(`${uploadFolder}/${originalname}`, buffer);
-                }
+                await (0, fs_extra_1.writeFile)(`${uploadFolder}/${originalname}`, buffer);
             });
             return res;
         }
