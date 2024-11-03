@@ -34,6 +34,7 @@ let AuthService = class AuthService {
             subname: dto.subname,
             country: dto.country,
             city: dto.city,
+            userId: `${(Math.random() * 100000).toFixed()}`,
         });
         console.log(newUser);
         return newUser.save();
@@ -50,13 +51,14 @@ let AuthService = class AuthService {
         if (!isCorrectPass) {
             throw new common_1.UnauthorizedException(PASS_NOT_CORRECT);
         }
-        return { login: user.login };
+        return { login: user.login, userId: user.userId };
     }
-    async login(login) {
+    async login(login, userId) {
         const payload = { login };
         return {
             access_token: await this.jwtService.signAsync(payload),
             login: login,
+            userId: userId,
         };
     }
     async findByLogin(login) {

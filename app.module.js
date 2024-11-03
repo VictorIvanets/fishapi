@@ -18,6 +18,12 @@ const fishsets_module_1 = require("./fishsets/fishsets.module");
 const fotoset_module_1 = require("./fotoset/fotoset.module");
 const comment_module_1 = require("./comment/comment.module");
 const getfoto_module_1 = require("./getfoto/getfoto.module");
+const graphql_1 = require("@nestjs/graphql");
+const apollo_1 = require("@nestjs/apollo");
+const upper_case_directive_1 = require("./common/directives/upper-case.directive");
+const graphql_2 = require("graphql");
+const chat_module_1 = require("./chat/chat.module");
+const userInOut_module_1 = require("./userInOut/userInOut.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -30,6 +36,26 @@ exports.AppModule = AppModule = __decorate([
                 inject: [config_1.ConfigService],
                 useFactory: mongo_config_1.getMongoConfig,
             }),
+            graphql_1.GraphQLModule.forRoot({
+                driver: apollo_1.ApolloDriver,
+                autoSchemaFile: 'schema.gql',
+                transformSchema: (schema) => (0, upper_case_directive_1.upperDirectiveTransformer)(schema, 'upper'),
+                playground: true,
+                subscriptions: {
+                    'graphql-ws': true,
+                    'subscriptions-transport-ws': true,
+                },
+                buildSchemaOptions: {
+                    directives: [
+                        new graphql_2.GraphQLDirective({
+                            name: 'upper',
+                            locations: [graphql_2.DirectiveLocation.FIELD_DEFINITION],
+                        }),
+                    ],
+                },
+            }),
+            userInOut_module_1.UserInOutModule,
+            chat_module_1.ChatModule,
             auth_module_1.AuthModule,
             fishsets_module_1.FishsetsModule,
             fotoset_module_1.FotosetModule,

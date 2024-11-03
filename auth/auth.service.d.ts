@@ -8,8 +8,8 @@ export declare class AuthService {
     constructor(userModel: ModelType<AuthModel>, jwtService: JwtService);
     createUser(dto: AuthDto): Promise<unknown>;
     findUser(login: string): Promise<AuthModel>;
-    validateUser(login: string, password: string): Promise<Pick<AuthModel, 'login'>>;
-    login(login: string): Promise<object>;
+    validateUser(login: string, password: string): Promise<Pick<AuthModel, 'login' | 'userId'>>;
+    login(login: string, userId: string): Promise<object>;
     findByLogin(login: string): Promise<AuthModel>;
     delByLogin(login: string): Promise<string>;
 }

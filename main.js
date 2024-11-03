@@ -8,6 +8,8 @@ async function bootstrap() {
     app.enableCors();
     app.setGlobalPrefix('api');
     await app.listen(PORT);
+    console.log(`🚀 Server graphql ready at http://localhost:${PORT}/graphql`);
+    console.log(`🚀 Server rest ready at http://localhost:${PORT}/api`);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

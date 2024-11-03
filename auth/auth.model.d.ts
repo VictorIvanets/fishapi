@@ -12,4 +12,5 @@ export declare class AuthModel extends TimeStamps {
     subname: string;
     country: string;
     city: string;
+    userId: string;
 }

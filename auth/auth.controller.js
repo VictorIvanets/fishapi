@@ -30,7 +30,7 @@ let AuthController = class AuthController {
     }
     async login({ login, password }) {
         const user = await this.authService.validateUser(login, password);
-        return this.authService.login(user.login);
+        return this.authService.login(user.login, user.userId);
     }
     async user(login) {
         console.log(login);
