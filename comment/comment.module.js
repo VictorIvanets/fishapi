@@ -25,7 +25,7 @@ exports.CommentModule = CommentModule = __decorate([
                 {
                     typegooseClass: comment_model_1.CommentModel,
                     schemaOptions: {
-                        collection: 'comment',
+                        collection: 'comments',
                     },
                 },
             ]),

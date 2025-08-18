@@ -44,8 +44,4 @@ __decorate([
     (0, typegoose_1.prop)(),
     __metadata("design:type", String)
 ], AuthModel.prototype, "city", void 0);
-__decorate([
-    (0, typegoose_1.prop)(),
-    __metadata("design:type", String)
-], AuthModel.prototype, "userId", void 0);
 //# sourceMappingURL=auth.model.js.map

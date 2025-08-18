@@ -15,23 +15,19 @@ class CommentDto {
 }
 exports.CommentDto = CommentDto;
 __decorate([
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", String)
-], CommentDto.prototype, "setId", void 0);
-__decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CommentDto.prototype, "login", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CommentDto.prototype, "comment", void 0);
-__decorate([
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], CommentDto.prototype, "commId", void 0);
+], CommentDto.prototype, "useId", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CommentDto.prototype, "db", void 0);
+], CommentDto.prototype, "setId", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CommentDto.prototype, "comment", void 0);
 //# sourceMappingURL=comment.dto.js.map

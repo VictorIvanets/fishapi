@@ -1,7 +1,6 @@
 export declare class CommentDto {
-    setId: string;
     login: string;
+    useId: string;
+    setId: string;
     comment: string;
-    commId: number;
-    db: string;
 }

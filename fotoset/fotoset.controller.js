@@ -8,43 +8,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FotosetController = void 0;
-const platform_express_1 = require("@nestjs/platform-express");
+exports.PhotosetController = void 0;
 const fotoset_service_1 = require("./fotoset.service");
 const common_1 = require("@nestjs/common");
-const mfile_class_1 = require("./mfile.class");
-const getfoto_service_1 = require("../getfoto/getfoto.service");
-let FotosetController = class FotosetController {
-    constructor(fotosetService, getfotoService) {
-        this.fotosetService = fotosetService;
+const getPhoto_service_1 = require("../getPhoto/getPhoto.service");
+const swagger_1 = require("@nestjs/swagger");
+const passport_1 = require("@nestjs/passport");
+let PhotosetController = class PhotosetController {
+    constructor(photosetService, getfotoService) {
+        this.photosetService = photosetService;
         this.getfotoService = getfotoService;
     }
-    async uploadFoto(file, folder) {
-        if (file) {
-            const saveArr = [new mfile_class_1.MFile(file)];
-            this.getfotoService.saveFotoBd(saveArr, folder);
-            return this.fotosetService.saveFoto(saveArr, folder);
-        }
-    }
 };
-exports.FotosetController = FotosetController;
-__decorate([
-    (0, common_1.Post)('upload/:folder'),
-    (0, common_1.HttpCode)(200),
-    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('files')),
-    __param(0, (0, common_1.UploadedFile)()),
-    __param(1, (0, common_1.Param)('folder')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String]),
-    __metadata("design:returntype", Promise)
-], FotosetController.prototype, "uploadFoto", null);
-exports.FotosetController = FotosetController = __decorate([
-    (0, common_1.Controller)('fotoset'),
+exports.PhotosetController = PhotosetController;
+exports.PhotosetController = PhotosetController = __decorate([
+    (0, swagger_1.ApiTags)('Photoset'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
+    (0, common_1.Controller)('photoset'),
     __metadata("design:paramtypes", [fotoset_service_1.FotosetService,
-        getfoto_service_1.GetfotoService])
-], FotosetController);
+        getPhoto_service_1.GetPhotoService])
+], PhotosetController);
 //# sourceMappingURL=fotoset.controller.js.map

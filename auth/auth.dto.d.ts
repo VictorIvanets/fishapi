@@ -6,3 +6,7 @@ export declare class AuthDto {
     country: string;
     city: string;
 }
+export declare class loginDto {
+    login: string;
+    password: string;
+}

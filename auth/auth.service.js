@@ -18,63 +18,65 @@ const nestjs_typegoose_1 = require("nestjs-typegoose");
 const bcryptjs_1 = require("bcryptjs");
 const jwt_1 = require("@nestjs/jwt");
 const auth_model_1 = require("./auth.model");
-const USER_NOT_FOUND = 'Такого користувача не знайдено';
-const PASS_NOT_CORRECT = 'Невірний пароль';
+const config_1 = require("@nestjs/config");
+const static_1 = require("../STATIC/static");
 let AuthService = class AuthService {
-    constructor(userModel, jwtService) {
-        this.userModel = userModel;
+    constructor(authModel, jwtService, configService) {
+        this.authModel = authModel;
         this.jwtService = jwtService;
+        this.configService = configService;
     }
     async createUser(dto) {
         const salt = (0, bcryptjs_1.genSaltSync)(10);
-        const newUser = new this.userModel({
+        const newUser = new this.authModel({
             login: dto.login,
             passwordHash: (0, bcryptjs_1.hashSync)(dto.password, salt),
             name: dto.name,
             subname: dto.subname,
             country: dto.country,
             city: dto.city,
-            userId: `${(Math.random() * 100000).toFixed()}`,
         });
-        console.log(newUser);
         return newUser.save();
     }
     async findUser(login) {
-        return this.userModel.findOne({ login }).exec();
+        return this.authModel.findOne({ login }).exec();
+    }
+    async findUserById(user) {
+        return this.authModel.findOne({ _id: user._id }).exec();
     }
     async validateUser(login, password) {
-        const user = await this.findUser(login);
-        if (!user) {
-            throw new common_1.UnauthorizedException(USER_NOT_FOUND);
+        try {
+            const user = await this.authModel.findOne({ login });
+            if (!user) {
+                throw new common_1.UnauthorizedException(static_1.USER_NOT_FOUND);
+            }
+            const isCorrectPass = await (0, bcryptjs_1.compare)(password, user.passwordHash);
+            if (!isCorrectPass) {
+                throw new common_1.UnauthorizedException(static_1.PASS_NOT_CORRECT);
+            }
+            return { login: user.login, _id: user._id };
         }
-        const isCorrectPass = await (0, bcryptjs_1.compare)(password, user.passwordHash);
-        if (!isCorrectPass) {
-            throw new common_1.UnauthorizedException(PASS_NOT_CORRECT);
+        catch (e) {
+            throw new common_1.UnauthorizedException(e);
         }
-        return { login: user.login, userId: user.userId };
     }
-    async login(login, userId) {
-        const payload = { login };
+    async login(login, _id) {
+        const secret = this.configService.get('JWT_SECRET');
         return {
-            access_token: await this.jwtService.signAsync(payload),
+            access_token: await this.jwtService.signAsync({ login, _id }, { secret }),
             login: login,
-            userId: userId,
+            _id,
         };
     }
-    async findByLogin(login) {
-        const user = await this.findUser(login);
-        return user;
-    }
-    async delByLogin(login) {
-        const { _id } = await this.findUser(login);
-        this.userModel.findByIdAndDelete(_id).exec();
-        return `delete: ${login}`;
+    async delUserById(id) {
+        return await this.authModel.findByIdAndDelete({ _id: id }).exec();
     }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, nestjs_typegoose_1.InjectModel)(auth_model_1.AuthModel)),
-    __metadata("design:paramtypes", [Object, jwt_1.JwtService])
+    __metadata("design:paramtypes", [Object, jwt_1.JwtService,
+        config_1.ConfigService])
 ], AuthService);
 //# sourceMappingURL=auth.service.js.map

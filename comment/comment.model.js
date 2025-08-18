@@ -16,13 +16,13 @@ class CommentModel extends defaultClasses_1.TimeStamps {
 }
 exports.CommentModel = CommentModel;
 __decorate([
-    (0, typegoose_1.prop)({ unique: true }),
-    __metadata("design:type", Number)
-], CommentModel.prototype, "commId", void 0);
-__decorate([
     (0, typegoose_1.prop)(),
     __metadata("design:type", String)
 ], CommentModel.prototype, "login", void 0);
+__decorate([
+    (0, typegoose_1.prop)(),
+    __metadata("design:type", String)
+], CommentModel.prototype, "useId", void 0);
 __decorate([
     (0, typegoose_1.prop)(),
     __metadata("design:type", String)
@@ -31,8 +31,4 @@ __decorate([
     (0, typegoose_1.prop)(),
     __metadata("design:type", String)
 ], CommentModel.prototype, "comment", void 0);
-__decorate([
-    (0, typegoose_1.prop)(),
-    __metadata("design:type", String)
-], CommentModel.prototype, "db", void 0);
 //# sourceMappingURL=comment.model.js.map

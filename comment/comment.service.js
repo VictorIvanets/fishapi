@@ -21,30 +21,25 @@ let CommentService = class CommentService {
         this.commentModel = commentModel;
     }
     async createComment(dto) {
-        const newComment = new this.commentModel({
-            login: dto.login,
-            setId: dto.setId,
-            db: 'comment',
-            comment: dto.comment,
-            commId: dto.commId,
-        });
-        console.log(newComment);
-        return newComment.save();
+        const newComment = new this.commentModel(dto);
+        const res = await newComment.save();
+        return res;
     }
     async getCommentBySetId(setId) {
         return this.commentModel.find({ setId }).exec();
     }
-    async delCommById(commId) {
-        const res = this.commentModel.findOneAndDelete({ commId }).exec();
-        return `delete ${commId}`;
+    async delCommById(_id) {
+        const res = await this.commentModel.deleteOne({ _id }).exec();
+        if (res.deletedCount === 1)
+            return { success: true, id: _id };
+        return { success: false, message: 'Коментарія з таким ID не знайдено' };
     }
     async delCommBySetId(setId) {
         const result = await this.commentModel.find({ setId }).exec();
-        result.forEach((i) => {
-            const setId = i.setId;
-            this.commentModel.findOneAndDelete({ setId }).exec();
+        result.forEach(async (i) => {
+            await this.commentModel.deleteOne({ setId: i.setId }).exec();
         });
-        return `del comment for ${setId}`;
+        return setId;
     }
 };
 exports.CommentService = CommentService;

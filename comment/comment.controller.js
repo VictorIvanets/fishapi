@@ -16,6 +16,8 @@ exports.CommentController = void 0;
 const common_1 = require("@nestjs/common");
 const comment_service_1 = require("./comment.service");
 const comment_dto_1 = require("./comment.dto");
+const passport_1 = require("@nestjs/passport");
+const swagger_1 = require("@nestjs/swagger");
 let CommentController = class CommentController {
     constructor(commentService) {
         this.commentService = commentService;
@@ -68,6 +70,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CommentController.prototype, "delAllComment", null);
 exports.CommentController = CommentController = __decorate([
+    (0, swagger_1.ApiTags)('Comment'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
     (0, common_1.Controller)('comment'),
     __metadata("design:paramtypes", [comment_service_1.CommentService])
 ], CommentController);

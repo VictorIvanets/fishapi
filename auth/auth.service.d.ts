@@ -2,14 +2,21 @@ import { ModelType } from '@typegoose/typegoose/lib/types';
 import { JwtService } from '@nestjs/jwt';
 import { AuthModel } from './auth.model';
 import { AuthDto } from './auth.dto';
+import { ConfigService } from '@nestjs/config';
+import { AuthResponseT, RegisterResponseT } from './auth.types';
+import { Types } from 'mongoose';
 export declare class AuthService {
-    private readonly userModel;
+    private readonly authModel;
     private readonly jwtService;
-    constructor(userModel: ModelType<AuthModel>, jwtService: JwtService);
-    createUser(dto: AuthDto): Promise<unknown>;
+    private readonly configService;
+    constructor(authModel: ModelType<AuthModel>, jwtService: JwtService, configService: ConfigService);
+    createUser(dto: AuthDto): Promise<RegisterResponseT>;
     findUser(login: string): Promise<AuthModel>;
-    validateUser(login: string, password: string): Promise<Pick<AuthModel, 'login' | 'userId'>>;
-    login(login: string, userId: string): Promise<object>;
-    findByLogin(login: string): Promise<AuthModel>;
-    delByLogin(login: string): Promise<string>;
+    findUserById(user: {
+        _id: string;
+        login: string;
+    }): Promise<AuthModel>;
+    validateUser(login: string, password: string): Promise<Pick<AuthModel, 'login'> & Record<'_id', Types.ObjectId>>;
+    login(login: string, _id: Types.ObjectId): Promise<AuthResponseT>;
+    delUserById(id: string): Promise<AuthModel>;
 }

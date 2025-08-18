@@ -37,7 +37,7 @@ exports.FotosetModule = FotosetModule = __decorate([
             config_1.ConfigModule,
         ],
         providers: [fotoset_service_1.FotosetService],
-        controllers: [fotoset_controller_1.FotosetController],
+        controllers: [fotoset_controller_1.PhotosetController],
     })
 ], FotosetModule);
 //# sourceMappingURL=fotoset.module.js.map

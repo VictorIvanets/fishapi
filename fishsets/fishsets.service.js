@@ -41,7 +41,10 @@ let FishsetsService = class FishsetsService {
         return this.fishModel.find({ login }).exec();
     }
     async findAllSets(db) {
-        return this.fishModel.find({ db }).exec();
+        console.log(db);
+        const res = await this.fishModel.find({ db }).exec();
+        console.log(res.length);
+        return res;
     }
     async delById(setID) {
         const res = this.fishModel.find({ setID }).exec();

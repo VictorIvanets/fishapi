@@ -21,7 +21,7 @@ let FotosetService = class FotosetService {
     constructor(fishModel) {
         this.fishModel = fishModel;
     }
-    async saveFoto(files, folder) {
+    async savePhoto(files, folder) {
         const res = [];
         for (const file of files) {
             res.push({

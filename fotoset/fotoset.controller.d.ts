@@ -1,9 +1,7 @@
 import { FotosetService } from './fotoset.service';
-import { FileElemResponse } from './fotoset.dto';
-import { GetfotoService } from 'src/getfoto/getfoto.service';
-export declare class FotosetController {
-    private readonly fotosetService;
+import { GetPhotoService } from 'src/getPhoto/getPhoto.service';
+export declare class PhotosetController {
+    private readonly photosetService;
     private readonly getfotoService;
-    constructor(fotosetService: FotosetService, getfotoService: GetfotoService);
-    uploadFoto(file: Express.Multer.File, folder: string): Promise<FileElemResponse[]>;
+    constructor(photosetService: FotosetService, getfotoService: GetPhotoService);
 }
