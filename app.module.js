@@ -26,6 +26,8 @@ const chat_module_1 = require("./chat/chat.module");
 const userInOut_module_1 = require("./userInOut/userInOut.module");
 const fishings_module_1 = require("./fishings/fishings.module");
 const photo_module_1 = require("./photoFishing/photo.module");
+const posts_module_1 = require("./posts/posts.module");
+const postComments_module_1 = require("./postComments/postComments.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -65,6 +67,8 @@ exports.AppModule = AppModule = __decorate([
             getPhoto_module_1.GetPhotoModule,
             fishings_module_1.FishingsModule,
             photo_module_1.PhotoModule,
+            posts_module_1.PostsModule,
+            postComments_module_1.PostsCommentsModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

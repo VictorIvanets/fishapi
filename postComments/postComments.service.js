@@ -12,40 +12,46 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CommentService = void 0;
+exports.PostsCommentsService = void 0;
 const common_1 = require("@nestjs/common");
 const nestjs_typegoose_1 = require("nestjs-typegoose");
-const comment_model_1 = require("./comment.model");
-let CommentService = class CommentService {
-    constructor(commentModel) {
-        this.commentModel = commentModel;
+const postComments_model_1 = require("./postComments.model");
+let PostsCommentsService = class PostsCommentsService {
+    constructor(postCommentsModel) {
+        this.postCommentsModel = postCommentsModel;
     }
-    async createComment(dto) {
-        const newComment = new this.commentModel(dto);
+    async createComment(dto, user) {
+        const newComment = new this.postCommentsModel({
+            login: user.login,
+            useId: user._id,
+            postId: dto.postId,
+            comment: dto.comment,
+        });
         const res = await newComment.save();
         return res;
     }
-    async getCommentBySetId(setId) {
-        return this.commentModel.find({ setId }).exec();
+    async getCommentBySetId(postId) {
+        return this.postCommentsModel.find({ postId }).exec();
     }
     async delCommById(_id) {
-        const res = await this.commentModel.deleteOne({ _id }).exec();
+        const res = await this.postCommentsModel.deleteOne({ _id }).exec();
         if (res.deletedCount === 1)
             return { success: true, id: _id };
         return { success: false, message: 'Коментарія з таким ID не знайдено' };
     }
-    async delCommBySetId(setId) {
-        const result = await this.commentModel.deleteMany({ setId }).exec();
-        if (result.deletedCount === 0) {
-            return `Коментарів з таким setId не знайдено`;
-        }
-        return setId;
+    async delCommBySetId(postId) {
+        const res = await this.postCommentsModel.deleteMany({ postId }).exec();
+        return {
+            success: res.deletedCount > 0,
+            id: postId,
+            message: `Видалено коментарів: ${res.deletedCount}`,
+        };
     }
 };
-exports.CommentService = CommentService;
-exports.CommentService = CommentService = __decorate([
+exports.PostsCommentsService = PostsCommentsService;
+exports.PostsCommentsService = PostsCommentsService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, nestjs_typegoose_1.InjectModel)(comment_model_1.CommentModel)),
+    __param(0, (0, nestjs_typegoose_1.InjectModel)(postComments_model_1.PostCommentsModel)),
     __metadata("design:paramtypes", [Object])
-], CommentService);
-//# sourceMappingURL=comment.service.js.map
+], PostsCommentsService);
+//# sourceMappingURL=postComments.service.js.map
