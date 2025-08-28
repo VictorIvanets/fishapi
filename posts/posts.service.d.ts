@@ -8,6 +8,7 @@ export declare class PostsService {
         _id: string;
         login: string;
     }): Promise<PostsModel>;
+    updateCommentPost(id: string, delta: number): Promise<PostsModel>;
     myPosts(user: {
         _id: string;
     }, limit: number, cursor?: string, description?: string): Promise<{

@@ -19,19 +19,23 @@ const passport_1 = require("@nestjs/passport");
 const swagger_1 = require("@nestjs/swagger");
 const postCommentsdto_1 = require("./postCommentsdto");
 const auth_decorator_1 = require("../auth/auth.decorator");
+const posts_service_1 = require("../posts/posts.service");
 let PostsCommentsController = class PostsCommentsController {
-    constructor(postsCommentService) {
+    constructor(postsCommentService, postsService) {
         this.postsCommentService = postsCommentService;
+        this.postsService = postsService;
     }
     async setComment(dto, user) {
+        await this.postsService.updateCommentPost(dto.postId, 1);
         return await this.postsCommentService.createComment(dto, user);
     }
     async getComment(postId) {
         const comments = await this.postsCommentService.getCommentBySetId(postId);
         return comments.reverse();
     }
-    async delComment(id) {
-        return await this.postsCommentService.delCommById(id);
+    async delComment(commentId, postId) {
+        await this.postsService.updateCommentPost(postId, -1);
+        return await this.postsCommentService.delCommById(commentId);
     }
     async delAllComment(setId) {
         return await this.postsCommentService.delCommBySetId(setId);
@@ -57,10 +61,11 @@ __decorate([
 ], PostsCommentsController.prototype, "getComment", null);
 __decorate([
     (0, common_1.HttpCode)(200),
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Delete)('delete'),
+    __param(0, (0, common_1.Query)('commentId')),
+    __param(1, (0, common_1.Query)('postId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], PostsCommentsController.prototype, "delComment", null);
 __decorate([
@@ -75,6 +80,7 @@ exports.PostsCommentsController = PostsCommentsController = __decorate([
     (0, swagger_1.ApiTags)('PostComment'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
     (0, common_1.Controller)('postcomment'),
-    __metadata("design:paramtypes", [postComments_service_1.PostsCommentsService])
+    __metadata("design:paramtypes", [postComments_service_1.PostsCommentsService,
+        posts_service_1.PostsService])
 ], PostsCommentsController);
 //# sourceMappingURL=postCommentscontroller.js.map

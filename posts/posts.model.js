@@ -32,4 +32,8 @@ __decorate([
     (0, typegoose_1.prop)(),
     __metadata("design:type", String)
 ], PostsModel.prototype, "colorSchema", void 0);
+__decorate([
+    (0, typegoose_1.prop)(),
+    __metadata("design:type", Number)
+], PostsModel.prototype, "commentCount", void 0);
 //# sourceMappingURL=posts.model.js.map

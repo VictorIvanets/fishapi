@@ -7,6 +7,7 @@ export declare class PostsModel extends TimeStamps {
     userId: Types.ObjectId;
     description: string;
     colorSchema: string;
+    commentCount: number;
 }
 export type PostsResponseDBT = Omit<PostsModel & Required<{
     _id: Types.ObjectId;

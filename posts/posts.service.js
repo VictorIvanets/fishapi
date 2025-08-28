@@ -28,8 +28,19 @@ let PostsService = class PostsService {
             userId: user._id,
             description: dto.description,
             colorSchema: dto.colorSchema,
+            commentCount: 0,
         });
         return await newPost.save();
+    }
+    async updateCommentPost(id, delta) {
+        try {
+            return await this.postsModel
+                .findByIdAndUpdate(id, { $inc: { commentCount: delta } }, { new: true })
+                .exec();
+        }
+        catch (e) {
+            throw new common_1.UnauthorizedException(static_1.INVALID_ID, e);
+        }
     }
     async myPosts(user, limit, cursor, description) {
         try {
